@@ -1,130 +1,264 @@
-<section style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#14181d;line-height:1.6;max-width:1000px;margin:0 auto;padding:0 0 48px">
+<section class="aidash">
+<style>
+.aidash{--ink:#0F172A;--body:#475569;--soft:#64748B;--line:#E2E8F0;--tint:#F8FAFC;
+ --teal:#0D9488;--teal-lt:#CCFBF1;--green:#047857;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ color:var(--ink);background:#fff;line-height:1.65;max-width:1020px;margin:0 auto;padding:0 0 56px;
+ -webkit-font-smoothing:antialiased}
+.aidash *{box-sizing:border-box}
+.aidash p{margin:0 0 14px}
+.aidash h2{font-size:30px;line-height:1.2;font-weight:750;letter-spacing:-.02em;margin:0 0 10px}
+.aidash h3{font-size:18px;line-height:1.35;font-weight:700;margin:0 0 6px}
+.aidash .lede{font-size:18px;color:var(--body);max-width:640px;margin:0 0 28px}
+.aidash .sec{padding:44px 0;border-top:1px solid var(--line)}
 
-  <div style="background:linear-gradient(135deg,#14181d 0%,#1f2b3a 100%);border-radius:14px;
-              padding:56px 40px;text-align:center;color:#fff">
-    <p style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;
-              letter-spacing:.16em;text-transform:uppercase;color:#8db0d8;margin:0 0 16px">
-      Free &amp; open source · LGPL-3
+.aidash .hero{padding:52px 32px 46px;text-align:center;
+ background:linear-gradient(170deg,#0F172A 0%,#134E4A 100%);border-radius:18px;color:#fff}
+.aidash .hero h1{font-size:46px;line-height:1.06;font-weight:800;letter-spacing:-.03em;
+ margin:0 0 16px;color:#fff}
+.aidash .hero p{font-size:19px;color:#C3D2D6;max-width:610px;margin:0 auto 22px}
+.aidash .pill{display:inline-block;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);
+ color:#fff;border-radius:999px;padding:7px 18px;font-size:13.5px;font-weight:650;margin:0 0 22px}
+
+/* the conversation → dashboard demo */
+.aidash .demo{display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;
+ max-width:840px;margin:26px auto 0;text-align:left}
+.aidash .chat{flex:1 1 300px;background:#0B1220;border:1px solid rgba(255,255,255,.1);
+ border-radius:14px;padding:20px}
+.aidash .said{background:#1E293B;color:#E2E8F0;border-radius:12px 12px 4px 12px;
+ padding:11px 15px;font-size:15px;margin:0 0 14px}
+.aidash .replied{color:#94A3B8;font-size:13.5px;margin:0 0 8px}
+.aidash .replied b{color:#5EEAD4;font-weight:650}
+.aidash .arrow{align-self:center;color:#5EEAD4;font-size:26px;flex:0 0 auto;padding:0 2px}
+.aidash .board{flex:1 1 330px;background:#fff;border-radius:14px;padding:18px 18px 20px}
+.aidash .bt{font-size:13px;font-weight:750;color:var(--ink);margin:0 0 3px}
+.aidash .bs{font-size:11.5px;color:var(--soft);margin:0 0 14px}
+.aidash .tiles{display:flex;gap:8px;margin:0 0 12px}
+.aidash .tile{flex:1;background:var(--tint);border-radius:8px;padding:9px 10px}
+.aidash .tn{font-size:9.5px;color:var(--soft);text-transform:uppercase;letter-spacing:.07em;margin:0 0 2px}
+.aidash .tv{font-size:17px;font-weight:750;color:var(--ink)}
+.aidash .bars{display:flex;align-items:flex-end;gap:7px;height:82px;padding:0 2px}
+.aidash .bar{flex:1;background:var(--teal);border-radius:3px 3px 0 0;opacity:.88}
+.aidash .axis{display:flex;gap:7px;margin:6px 0 0;padding:0 2px}
+.aidash .axis span{flex:1;font-size:9.5px;color:var(--soft);text-align:center}
+.aidash .cap{font-size:13.5px;color:#93A6AC;margin:16px 0 0}
+
+.aidash .grid{display:flex;flex-wrap:wrap;gap:14px}
+.aidash .col{flex:1 1 290px;background:#fff;border:1px solid var(--line);
+ border-radius:14px;padding:22px 24px}
+.aidash .col p{font-size:15px;color:var(--body);margin:0}
+
+.aidash .quote{background:var(--tint);border-left:4px solid var(--teal);
+ border-radius:0 14px 14px 0;padding:26px 30px}
+.aidash .quote p{font-size:16.5px;color:var(--body);margin:0}
+.aidash .quote b{color:var(--ink)}
+
+.aidash .step{display:flex;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.aidash .step:first-of-type{border-top:0}
+.aidash .num{flex:0 0 34px;height:34px;border-radius:50%;background:var(--teal-lt);color:var(--teal);
+ font-weight:750;font-size:15px;display:flex;align-items:center;justify-content:center}
+.aidash .step p{margin:0;font-size:15.5px;color:var(--body)}
+.aidash .step b{color:var(--ink)}
+
+.aidash .limits{border:1px dashed #CBD5E1;border-radius:16px;padding:30px 32px}
+.aidash .lrow{display:flex;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:15.5px}
+.aidash .lrow:first-of-type{border-top:0}
+.aidash .tick{flex:0 0 22px;color:var(--green);font-weight:800}
+.aidash .dash{flex:0 0 22px;color:#94A3B8;font-weight:800}
+
+.aidash .need{background:var(--tint);border-radius:16px;padding:28px 32px}
+.aidash .foot{text-align:center;padding:34px 0 0;border-top:1px solid var(--line);
+ color:var(--soft);font-size:14px}
+.aidash .foot a{color:var(--teal);font-weight:650;text-decoration:none}
+
+@media(max-width:640px){
+ .aidash .hero{padding:38px 20px 32px}
+ .aidash .hero h1{font-size:33px}
+ .aidash h2{font-size:25px}
+ .aidash .arrow{display:none}
+}
+</style>
+
+<!-- ==================================================================== hero -->
+<div class="hero">
+  <span class="pill">Free &amp; open source · Built by talking to Claude or ChatGPT</span>
+  <h1>Describe the dashboard.<br/>Get the dashboard.</h1>
+  <p>
+    Say what you want to see in one sentence. It appears in Odoo as a real
+    screen you and your team open like any other — live, always current, always
+    your own numbers.
+  </p>
+
+  <div class="demo">
+    <div class="chat">
+      <p class="said">Build me a dashboard of monthly revenue this year, with the totals at the top.</p>
+      <p class="replied"><b>Odoo</b> · created a draft dashboard</p>
+      <p class="replied">Here it is — 6 months of revenue, with totals. Have a look and publish it if it's right.</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="board">
+      <p class="bt">Revenue this year</p>
+      <p class="bs">Updated the moment you open it</p>
+      <div class="tiles">
+        <div class="tile"><div class="tn">Revenue</div><div class="tv">412k</div></div>
+        <div class="tile"><div class="tn">Orders</div><div class="tv">1,284</div></div>
+        <div class="tile"><div class="tn">Avg order</div><div class="tv">321</div></div>
+      </div>
+      <div class="bars">
+        <div class="bar" style="height:44%"></div>
+        <div class="bar" style="height:58%"></div>
+        <div class="bar" style="height:51%"></div>
+        <div class="bar" style="height:73%"></div>
+        <div class="bar" style="height:66%"></div>
+        <div class="bar" style="height:92%"></div>
+      </div>
+      <div class="axis"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+    </div>
+  </div>
+  <p class="cap">One sentence in. A working Odoo screen out.</p>
+</div>
+
+<!-- ================================================================ the point -->
+<div class="sec">
+  <h2>Nobody builds the dashboard they wanted</h2>
+  <p class="lede">
+    Not because it is hard, but because it is twenty fiddly minutes and you only
+    wanted to know one thing. So the question goes unanswered, or it becomes a
+    spreadsheet that is out of date by Thursday.
+  </p>
+  <div class="grid">
+    <div class="col">
+      <h3>Ask in a sentence</h3>
+      <p>"Open orders by salesperson, this quarter." "Stock value by category."
+        "Late deliveries by week." However you would say it out loud.</p>
+    </div>
+    <div class="col">
+      <h3>Look before you keep it</h3>
+      <p>What comes back is a draft only you can see. Nothing joins your Odoo
+        until you have looked at it and said yes.</p>
+    </div>
+    <div class="col">
+      <h3>Change it by asking</h3>
+      <p>"Make that a line chart." "Split it by region." It reads what is
+        already there and adjusts, rather than starting over.</p>
+    </div>
+    <div class="col">
+      <h3>Or nudge it by hand</h3>
+      <p>Drag tiles around, resize, rename, recolour. For small things it is
+        quicker than going back to the conversation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================== trust 1 -->
+<div class="sec">
+  <div class="quote">
+    <h2 style="margin-bottom:12px">It saves the question, never the numbers</h2>
+    <p>
+      This is the part worth understanding, because everything good about it
+      follows from it. A dashboard here stores <b>"revenue by month, this
+      year"</b> — it does not store the figures. They are worked out fresh every
+      single time somebody opens it.
     </p>
-    <h1 style="font-size:42px;line-height:1.1;margin:0 0 14px;font-weight:700;color:#fff">
-      Ask for a dashboard. Get a real one.
-    </h1>
-    <p style="font-size:19px;color:#c8d2de;max-width:640px;margin:0 auto">
-      Describe what you want in plain English to Claude, ChatGPT or Cursor.
-      It lands in Odoo as a screen you open like any other — live, permission-aware,
-      and never a screenshot.
+    <p style="margin-top:14px">
+      So it is never out of date. There is no refresh to remember, no overnight
+      job to fail quietly, and no screenshot circulating that stopped being true
+      three weeks ago.
     </p>
   </div>
+</div>
 
-  <!-- ========================================================= the argument -->
-  <div style="border-left:3px solid #2f4b6e;background:#f7f8fa;border-radius:0 12px 12px 0;
-              padding:26px 30px;margin:36px 0">
-    <h2 style="font-size:22px;margin:0 0 8px;font-weight:700">The AI never writes code</h2>
-    <p style="margin:0;color:#4e586a">
-      It writes a <b>specification</b> — which model, which filter, which
-      grouping, which measures — and Odoo validates it and draws the charts.
-      There is no generated SQL anywhere in this module, and that matters more
-      than it sounds: SQL written by a language model runs outside the ORM, and
-      therefore outside every access right and record rule your database has.
-      A specification cannot, because it is data rather than instructions.
+<!-- ================================================================== trust 2 -->
+<div class="sec">
+  <h2>And it shows each person their own figures</h2>
+  <p class="lede">
+    Because the numbers are worked out when the dashboard is opened, they are
+    worked out <b>as whoever opened it</b>.
+  </p>
+  <div class="grid">
+    <div class="col">
+      <h3>No one sees more than they should</h3>
+      <p>If a colleague cannot open a record in Odoo today, it will not appear
+        in their view of a dashboard either. The permissions you already set up
+        are the ones that apply.</p>
+    </div>
+    <div class="col">
+      <h3>Right for multi-company, automatically</h3>
+      <p>Running more than one company in the same Odoo? Each person sees their
+        own. There is nothing to configure for it.</p>
+    </div>
+    <div class="col">
+      <h3>Click a bar, see the records</h3>
+      <p>Every figure goes back to the orders or invoices behind it, in a normal
+        Odoo list. Nothing is a black box you have to take on faith.</p>
+    </div>
+    <div class="col">
+      <h3>Every version kept</h3>
+      <p>Asked for a change and preferred it before? Put it back with one click.
+        Nothing you build can be lost by experimenting.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================================================================== setup -->
+<div class="sec">
+  <h2>Getting started</h2>
+  <div class="step">
+    <div class="num">1</div>
+    <p><b>Install AI MCP first</b> — it is free too, and it is what connects your
+      assistant to Odoo. Odoo will offer to install it with this one.</p>
+  </div>
+  <div class="step">
+    <div class="num">2</div>
+    <p><b>Connect your assistant once.</b> Copy one address, paste it in, sign in
+      with your normal Odoo login. About two minutes, and you only do it once.</p>
+  </div>
+  <div class="step">
+    <div class="num">3</div>
+    <p><b>Ask for a dashboard.</b> That is the whole thing. No setup screens, no
+      choosing chart types from a menu, nothing to configure first.</p>
+  </div>
+</div>
+
+<!-- =================================================================== limits -->
+<div class="sec">
+  <div class="limits">
+    <h2>Free, and honest about where it stops</h2>
+    <p class="lede" style="margin-bottom:20px">
+      Everything that makes it work is here. What is missing is what you need
+      once a whole team depends on it.
+    </p>
+    <div class="lrow"><span class="tick">✓</span><span>Build and change dashboards by asking, as many times as you like</span></div>
+    <div class="lrow"><span class="tick">✓</span><span>Charts, totals, tables and two-way breakdowns</span></div>
+    <div class="lrow"><span class="tick">✓</span><span>Compare against last year or the period before</span></div>
+    <div class="lrow"><span class="tick">✓</span><span>Click through to the records, and undo any change</span></div>
+    <div class="lrow"><span class="tick">✓</span><span><b>Everyone in your company</b> gets their own — one draft and one live dashboard each</span></div>
+    <div class="lrow"><span class="dash">—</span><span><b>More than one live dashboard per person</b></span></div>
+    <div class="lrow"><span class="dash">—</span><span><b>Sharing one with a colleague or a whole team</b></span></div>
+    <div class="lrow"><span class="dash">—</span><span><b>Having it emailed to you</b> every morning, week or month</span></div>
+    <p style="font-size:15.5px;color:var(--body);margin:20px 0 0">
+      Those three are <b>AI Dashboards Pro</b>. The limit here is one draft and
+      one live dashboard <b>per person</b>, not per company — so your whole team
+      can try it properly before anyone spends anything.
     </p>
   </div>
+</div>
 
-  <div style="border-left:3px solid #1e7d46;background:#f7f8fa;border-radius:0 12px 12px 0;
-              padding:26px 30px;margin:0 0 40px">
-    <h2 style="font-size:22px;margin:0 0 8px;font-weight:700">
-      Dashboards store the question, not the answer
-    </h2>
-    <p style="margin:0;color:#4e586a">
-      A saved dashboard holds <i>"revenue by month, this year"</i> — never the
-      numbers. The query runs when you open it, <b>as you</b>, through the ORM.
-      So it is never stale, and it respects multi-company boundaries without
-      anyone configuring anything.
+<!-- ===================================================================== need -->
+<div class="sec">
+  <div class="need">
+    <h2 style="font-size:22px;margin-bottom:8px">One thing to know before you install</h2>
+    <p style="margin:0;font-size:15.5px;color:var(--body)">
+      You bring your own assistant. There is no AI included here and nothing to
+      subscribe to — it works with the Claude or ChatGPT account you already
+      have. Your data goes to the assistant you chose and nowhere else.
     </p>
   </div>
+</div>
 
-  <!-- ============================================================== what -->
-  <h2 style="font-size:26px;margin:0 0 16px;font-weight:700">What you get</h2>
-  <table style="width:100%;border-collapse:separate;border-spacing:12px">
-    <tr>
-      <td style="width:50%;vertical-align:top;background:#fff;border:1px solid #dde2e9;border-radius:12px;padding:20px">
-        <b style="display:block;margin-bottom:6px">Preview before it is saved</b>
-        <span style="color:#4e586a;font-size:15px">Nothing is kept until you have looked at it.</span>
-      </td>
-      <td style="width:50%;vertical-align:top;background:#fff;border:1px solid #dde2e9;border-radius:12px;padding:20px">
-        <b style="display:block;margin-bottom:6px">Drill through</b>
-        <span style="color:#4e586a;font-size:15px">Click a bar, get the records behind it in a normal Odoo list.</span>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align:top;background:#fff;border:1px solid #dde2e9;border-radius:12px;padding:20px">
-        <b style="display:block;margin-bottom:6px">Edit by conversation</b>
-        <span style="color:#4e586a;font-size:15px">Ask for a change; the assistant reads what exists and proposes a diff instead of rebuilding.</span>
-      </td>
-      <td style="vertical-align:top;background:#fff;border:1px solid #dde2e9;border-radius:12px;padding:20px">
-        <b style="display:block;margin-bottom:6px">A light editor</b>
-        <span style="color:#4e586a;font-size:15px">Drag to reorder, resize, rename, recolour — without going back to the chat.</span>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align:top;background:#fff;border:1px solid #dde2e9;border-radius:12px;padding:20px">
-        <b style="display:block;margin-bottom:6px">Every version kept</b>
-        <span style="color:#4e586a;font-size:15px">One-click revert when a change was wrong.</span>
-      </td>
-      <td style="vertical-align:top;background:#fff;border:1px solid #dde2e9;border-radius:12px;padding:20px">
-        <b style="display:block;margin-bottom:6px">Compare and pivot</b>
-        <span style="color:#4e586a;font-size:15px">Last year or the previous period, across the whole dashboard; two-dimensional pivots with both axes paged.</span>
-      </td>
-    </tr>
-  </table>
-
-  <!-- ============================================================ the line -->
-  <div style="border:1px dashed #dde2e9;border-radius:14px;padding:28px;margin:40px 0">
-    <h2 style="font-size:22px;margin:0 0 14px;font-weight:700">Free, and where it stops</h2>
-    <table style="width:100%;border-collapse:collapse;font-size:15px">
-      <tr style="color:#7a8494;font-size:13px;text-transform:uppercase;letter-spacing:.06em">
-        <td style="padding:6px 0;border-bottom:1px solid #dde2e9"></td>
-        <td style="padding:6px 12px;border-bottom:1px solid #dde2e9;text-align:center;width:110px">Free</td>
-        <td style="padding:6px 12px;border-bottom:1px solid #dde2e9;text-align:center;width:110px">Pro</td>
-      </tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid #e9ecf1">Build and edit by chatting</td>
-          <td style="text-align:center;border-bottom:1px solid #e9ecf1;color:#1e7d46">✓</td>
-          <td style="text-align:center;border-bottom:1px solid #e9ecf1;color:#1e7d46">✓</td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid #e9ecf1">Preview, drill-through, versions, pivots, comparison</td>
-          <td style="text-align:center;border-bottom:1px solid #e9ecf1;color:#1e7d46">✓</td>
-          <td style="text-align:center;border-bottom:1px solid #e9ecf1;color:#1e7d46">✓</td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid #e9ecf1">Number of dashboards</td>
-          <td style="text-align:center;border-bottom:1px solid #e9ecf1;color:#4e586a">1 draft + 1 live<br/><span style="font-size:12px;color:#7a8494">per person</span></td>
-          <td style="text-align:center;border-bottom:1px solid #e9ecf1;color:#1e7d46">Unlimited</td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid #e9ecf1">Share with people or whole teams</td>
-          <td style="text-align:center;border-bottom:1px solid #e9ecf1;color:#a8b0bb">—</td>
-          <td style="text-align:center;border-bottom:1px solid #e9ecf1;color:#1e7d46">✓</td></tr>
-      <tr><td style="padding:10px 0">Scheduled email, calculated per recipient</td>
-          <td style="text-align:center;color:#a8b0bb">—</td>
-          <td style="text-align:center;color:#1e7d46">✓</td></tr>
-    </table>
-    <p style="color:#4e586a;margin:16px 0 0;font-size:15px">
-      The limit is <b>per person</b>, not per database — a whole team can try it
-      properly before anyone pays for anything.
-    </p>
-  </div>
-
-  <!-- ============================================================ requires -->
-  <div style="background:#f7f8fa;border-radius:14px;padding:28px;margin:0 0 32px">
-    <h2 style="font-size:20px;margin:0 0 8px;font-weight:700">Needs AI MCP — also free</h2>
-    <p style="color:#4e586a;margin:0">
-      <b>AI MCP</b> provides the connection, the governance scope and the audit
-      trail. Dashboard tools appear on the MCP connection you already have —
-      one URL, one sign-in, one log. Install that first; Odoo will pull it in as
-      a dependency.
-    </p>
-  </div>
-
-  <div style="text-align:center;padding:24px 0 0;border-top:1px solid #dde2e9;color:#7a8494;font-size:14px">
-    <p style="margin:0 0 6px">
-      <a href="mailto:developers@fleet.ke" style="color:#2f4b6e;font-weight:600;text-decoration:none">developers@fleet.ke</a>
-    </p>
-    <p style="margin:0">Odoo 19 · Community · Enterprise · Odoo.sh · LGPL-3</p>
-  </div>
+<div class="foot">
+  <p style="margin:0 0 6px"><a href="mailto:developers@fleet.ke">developers@fleet.ke</a></p>
+  <p style="margin:0">Odoo 19 · Community, Enterprise and Odoo.sh · Open source (LGPL-3)</p>
+</div>
 
 </section>
