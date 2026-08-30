@@ -208,7 +208,7 @@ class TestSpecAgainstDatabase(TransactionCase):
             spec_lib.validate(spec, self.env, self.scope)
 
     def test_the_blacklist_hook_is_consulted_and_empty_here(self):
-        """Per-field exclusions are an AI MCP Governance feature.
+        """Per-field exclusions are an AI MCP Pro feature.
 
         What must survive in this edition is the *call*: the validator asks the
         matrix row for its blacklist on every spec, and a row that answered

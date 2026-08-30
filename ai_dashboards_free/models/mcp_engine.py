@@ -19,7 +19,7 @@ import logging
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, UserError
 
-from odoo.addons.mcp_governance_suite.models.mcp_url import public_base_url
+from odoo.addons.ai_mcp.models.mcp_url import public_base_url
 
 from . import ai_dashboard_spec as spec_lib
 
@@ -401,7 +401,7 @@ class MCPTool(models.Model):
         Getting this wrong is the failure this extension point exists to
         prevent: an unregistered writing handler computes writes=False, so it
         is advertised to read-only scopes and executes for connections that
-        were never granted odoo:write. mcp_governance_suite's
+        were never granted odoo:write. ai_mcp's
         tests/test_permissions.py fails if any handler is unclassified.
         """
         return super()._write_handlers() | DASHBOARD_WRITE_HANDLERS
