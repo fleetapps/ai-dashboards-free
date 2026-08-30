@@ -46,6 +46,29 @@ class MCPEngine(models.AbstractModel):
         """`seed_from_view` benefits from knowing which models are in scope."""
         return super()._model_aware_handlers() | {"seed_from_view"}
 
+    def _check_write_permitted(self, tool, audit_ctx):
+        """Let this module's own writing verbs through, and nothing else.
+
+        AI MCP refuses every writing verb outright: it implements only reads,
+        so a tool flagged as writing can only have come from a module that
+        added the verb without the governance to go with it, and refusing is
+        the fail-closed answer. This module *is* that governance, for its own
+        three verbs and no others.
+
+        What makes them safe to allow is that they do not write business data
+        at all. They create and edit `ai.dashboard` records - the saved
+        question, never the answer - owned by the acting user, subject to this
+        module's own record rule and quota. Reading the figures still goes
+        through the ordinary governed read path, as that person, so a dashboard
+        can never show anyone a row they could not open themselves.
+
+        Anything not in this module's set falls through to super(), so a third
+        module cannot ride in on this exemption.
+        """
+        if tool.handler in DASHBOARD_WRITE_HANDLERS:
+            return
+        return super()._check_write_permitted(tool, audit_ctx)
+
     # ----------------------------------------------------------- discovery
     def _handler_get_dashboard_schema(self, scope, args):
         """Teach the model the format, rather than hoping it guesses.

@@ -184,11 +184,9 @@ class TestSpecAgainstDatabase(TransactionCase):
         super().setUpClass()
         cls.scope = cls.env["mcp.scope"].create({
             "name": "TEST dashboards",
-            "read_only": True,
             "line_ids": [(0, 0, {
                 "model_id": cls.env["ir.model"]._get("res.partner").id,
                 "can_read": True,
-                "field_blacklist": "credit_limit",
             })],
         })
 
@@ -209,12 +207,21 @@ class TestSpecAgainstDatabase(TransactionCase):
         with self.assertRaises(spec_lib.SpecError):
             spec_lib.validate(spec, self.env, self.scope)
 
-    def test_a_blacklisted_field_is_refused(self):
+    def test_the_blacklist_hook_is_consulted_and_empty_here(self):
+        """Per-field exclusions are an AI MCP Governance feature.
+
+        What must survive in this edition is the *call*: the validator asks the
+        matrix row for its blacklist on every spec, and a row that answered
+        with an AttributeError instead of an empty set would crash every
+        dashboard save. The pairing between the two free modules turns on this
+        method existing, so it is asserted rather than assumed.
+        """
+        line = self.scope.line_for_model("res.partner")
+        self.assertEqual(line.blacklisted_fields(), set())
         spec = minimal()
         spec["widgets"][0]["query"]["measures"] = ["credit_limit:sum"]
         spec["widgets"][0]["query"]["group_by"] = ["country_id"]
-        with self.assertRaises(spec_lib.SpecError):
-            spec_lib.validate(spec, self.env, self.scope)
+        spec_lib.validate(spec, self.env, self.scope)   # must not raise
 
     def test_a_non_numeric_field_cannot_be_totalled(self):
         spec = minimal()
@@ -258,7 +265,7 @@ class TestStoredFields(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.scope = cls.env["mcp.scope"].create({
-            "name": "TEST stored", "read_only": True,
+            "name": "TEST stored",
             "line_ids": [(0, 0, {
                 "model_id": cls.env["ir.model"]._get("res.partner").id,
                 "can_read": True})],

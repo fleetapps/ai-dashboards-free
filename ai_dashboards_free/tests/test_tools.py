@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """The MCP tools, and the governance they inherit.
 
-The most important test in this file is test_write_tools_are_hidden_from_a
-_read_only_scope. A writing handler left out of mcp.tool._write_handlers()
-computes writes=False, so it is advertised to read-only connections and
-executes for tokens that were never granted odoo:write — the one way this
-module could quietly punch through the layer it is built on.
+The most important tests here are the two seams with AI MCP. A writing handler
+left out of mcp.tool._write_handlers() computes writes=False and slips past
+every gate built on that flag; and AI MCP refuses writing verbs outright, so
+this module has to be the declared exception for its own three - and only its
+own three. Get either wrong and the product is either unsafe or does nothing.
 """
 import json
 
+from odoo.exceptions import AccessError
 from odoo.tests import TransactionCase, tagged
 
 from ..models.mcp_engine import (
@@ -32,16 +33,6 @@ class TestDashboardTools(TransactionCase):
         })
         cls.scope = cls.env["mcp.scope"].create({
             "name": "TEST dashboard tools",
-            "read_only": False,
-            "require_approval": False,
-            "rate_limit_per_hour": 0,
-            "line_ids": [(0, 0, {"model_id": cls.partner_model.id,
-                                 "can_read": True})],
-        })
-        cls.read_only_scope = cls.env["mcp.scope"].create({
-            "name": "TEST dashboard read only",
-            "read_only": True,
-            "rate_limit_per_hour": 0,
             "line_ids": [(0, 0, {"model_id": cls.partner_model.id,
                                  "can_read": True})],
         })
@@ -65,12 +56,21 @@ class TestDashboardTools(TransactionCase):
         for handler in DASHBOARD_READ_HANDLERS:
             self.assertNotIn(handler, Tool._write_handlers())
 
-    def test_write_tools_are_hidden_from_a_read_only_scope(self):
-        """The regression this module's extension point exists to prevent."""
-        names = {t["name"] for t in self.Engine.list_tools(self.read_only_scope)}
+    def test_write_tools_are_advertised_and_gated_at_the_call(self):
+        """AI MCP has no read-only kill switch to hide them behind.
+
+        That edition implements no writing verb at all, so it drops the
+        scope-level switch and refuses writers in _check_write_permitted
+        instead. Which means these tools are listed - deliberately, since a
+        tool a client cannot see is one it can never be told to ask permission
+        for - and the guard is what decides. TestWriteGuardIntegration below
+        covers the decision itself.
+        """
+        names = {t["name"] for t in self.Engine.list_tools(self.scope)}
         self.assertIn("get_dashboard_schema", names)
-        self.assertNotIn("save_dashboard", names)
-        self.assertNotIn("preview_dashboard", names)
+        self.assertIn("save_dashboard", names)
+        self.assertNotIn("read_only", self.env["mcp.scope"]._fields,
+                         "if this comes back, hide write tools again")
 
     def test_write_tools_carry_the_right_annotations(self):
         tools = {t["name"]: t["annotations"]
@@ -220,3 +220,37 @@ class TestDashboardTools(TransactionCase):
         }]
         row = self.env["ai.dashboard.render"].sample(spec)[0]
         self.assertNotIn("error", row, "an empty result is not an error")
+
+
+@tagged("post_install", "-at_install")
+class TestWriteGuardIntegration(TransactionCase):
+    """AI MCP refuses every writing verb; this module has to be the exception.
+
+    Without the _check_write_permitted override, save_dashboard and
+    delete_dashboard are refused at the door and the entire product - "ask
+    Claude for a dashboard" - does nothing but list. This is the one seam
+    between the two free modules, so it gets a test rather than a comment.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.engine = cls.env["mcp.engine"]
+        cls.Tool = cls.env["mcp.tool"]
+
+    def test_dashboard_write_verbs_are_permitted(self):
+        for name in ("preview_dashboard", "save_dashboard", "delete_dashboard"):
+            tool = self.Tool.search([("name", "=", name)], limit=1)
+            self.assertTrue(tool, "%s must be registered" % name)
+            self.assertTrue(tool.writes, "%s must be classified as writing" % name)
+            self.engine._check_write_permitted(tool, {})   # must not raise
+
+    def test_a_foreign_writing_verb_is_still_refused(self):
+        """The exemption is for this module's verbs, not for writing at all."""
+        class ForeignTool:
+            name = "wreck_everything"
+            handler = "unlink_record"
+            writes = True
+
+        with self.assertRaises(AccessError):
+            self.engine._check_write_permitted(ForeignTool(), {})
