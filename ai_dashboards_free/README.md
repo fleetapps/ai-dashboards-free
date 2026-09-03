@@ -35,7 +35,7 @@ The limit is per person, not per database — a whole team can try it.
 
 ## Requires
 
-[AI MCP](https://github.com/fleetapps/ai-mcp) (`ai_mcp`), which provides the
+[AI MCP](https://github.com/fleetapps/ai-mcp) (`ai_mcp_free`), which provides the
 connection, the governance scope and the audit trail. Dashboard tools appear on
 the MCP connection you already have — one URL, one sign-in, one log.
 

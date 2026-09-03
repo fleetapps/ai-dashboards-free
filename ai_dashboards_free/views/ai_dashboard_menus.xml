@@ -29,6 +29,6 @@
          the gap that makes an install feel broken. -->
     <menuitem id="menu_dashboards_connect" name="Connect your AI"
               parent="menu_dashboards_root"
-              action="ai_mcp.mcp_connect_action"
+              action="ai_mcp_free.mcp_connect_action"
               groups="ai_dashboards_free.group_dashboard_user" sequence="10"/>
 </odoo>

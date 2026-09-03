@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Tools are data in ai_mcp, so this module adds a
+    <!-- Tools are data in ai_mcp_free, so this module adds a
          capability and seven tool records rather than touching the controller.
          noupdate=0 so description and schema fixes propagate on upgrade.
 

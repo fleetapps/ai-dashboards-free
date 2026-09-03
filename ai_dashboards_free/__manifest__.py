@@ -68,10 +68,10 @@ URL, one sign-in, one log.
     "support": "developers@fleet.ke",
     "maintainer": "Fleet",
     "license": "LGPL-3",
-    # ai_mcp brings the MCP transport, the OAuth 2.1 server, the tool registry
+    # ai_mcp_free brings the MCP transport, the OAuth 2.1 server, the tool registry
     # and the audit log. `bus` (used to tell an open browser a dashboard is
     # ready) arrives through its `mail` dependency.
-    "depends": ["ai_mcp"],
+    "depends": ["ai_mcp_free"],
     "data": [
         "security/ai_dashboards_free_security.xml",
         "security/ir.model.access.csv",

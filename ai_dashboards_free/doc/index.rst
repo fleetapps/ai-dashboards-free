@@ -12,7 +12,7 @@ Installation
 ============
 
 Drop ``ai_dashboards_free`` into your addons path and install it from Apps.
-Odoo installs `AI MCP` (``ai_mcp``) alongside it as a dependency — that is what
+Odoo installs `AI MCP` (``ai_mcp_free``) alongside it as a dependency — that is what
 provides the connection, the governance scope and the audit trail.
 
 Configuration

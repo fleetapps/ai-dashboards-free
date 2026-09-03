@@ -9,7 +9,7 @@ the commercial module and published under LGPL-3.
 
 ### Added
 - Build and edit dashboards by chatting with any MCP client, through the
-  connection `ai_mcp` already provides.
+  connection `ai_mcp_free` already provides.
 - Preview before saving, drill-through to the records behind a bar, full
   version history with one-click revert, a light drag-to-arrange editor,
   period comparison, and two-dimensional pivot tables.
