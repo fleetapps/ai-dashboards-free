@@ -90,6 +90,8 @@ URL, one sign-in, one log.
     "images": [
         "static/description/banner.png",
         "static/description/screenshot_dashboard.png",
+        "static/description/screenshot_ask.png",
+        "static/description/screenshot_connect.png",
     ],
     "pre_init_hook": "pre_init_check",
     "installable": True,
