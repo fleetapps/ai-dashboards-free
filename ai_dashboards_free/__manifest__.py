@@ -86,6 +86,11 @@ URL, one sign-in, one log.
             "ai_dashboards_free/static/src/dashboard/*.xml",
         ],
     },
+    # Without this the store shows an empty grey slot where the banner goes.
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_dashboard.png",
+    ],
     "pre_init_hook": "pre_init_check",
     "installable": True,
     "application": True,
